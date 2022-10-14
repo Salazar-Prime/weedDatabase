@@ -1,0 +1,13 @@
+cookie:
+  expiry_days: 30
+  key: some_signature_key
+  name: some_cookie_name
+credentials:
+  usernames:
+    aggarw82:
+      email: aggarw82@purdue.edu
+      name: Varun Agagrwal
+      password: $2b$12$B/2TmybP189bWeDTkUni2uvGhPF5uskREe.kwJ0QR68qWnjy96Du.
+preauthorized:
+  emails:
+  - aggarw82@purdue.edu
