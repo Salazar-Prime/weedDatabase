@@ -1,1 +1,1 @@
-# Start of somethign beautiful 
+# Start of something beautiful 
