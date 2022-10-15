@@ -1,18 +1,33 @@
+# from curses import def_shell_mode
 import streamlit as st
 import webbrowser
+import time
+
+# USER Imports
+from processImg import imageView
 
 
 def start_tabs():
     tab1, tab2, tab3 = st.tabs(["Single File Upload", "Helpful Links", "Our Team"])
 
     with tab1:
-        # st.title("Single File Upload")
         st.title("Upload a file to get started")
-        file = st.file_uploader(
-            label="Upload a file",
-            type=["jpg", "png", "JPG", "PNG", "jpeg", "JPEG"],
-            label_visibility="",
-        )
+        with st.form("my_form", clear_on_submit=True):
+            file = st.file_uploader(
+                label="Upload a file",
+                # label="",
+                type=["jpg", "png", "JPG", "PNG", "jpeg", "JPEG"],
+            )
+            checkbox_val = st.checkbox("Is Annotation Available?")
+
+            # Every form must have a submit button.
+            submitted = st.form_submit_button("Start Analysis")
+        if submitted:
+            imageView(file)
+            # spinner while inference is running
+            with st.spinner(text="Inferencing..."):
+                time.sleep(5)
+            st.success("Done!")
 
     with tab2:
         url = "https://www.streamlit.io/"
