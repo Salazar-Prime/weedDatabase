@@ -19,6 +19,7 @@ _RELEASE = False
 def startApp():
     st.title("SURF Template Generator")
     weedList = getWeedList("src/config/weedClassList.txt")
+    print(weedList)
     tabs = tabbed.start_tabs(weedList)
 
 

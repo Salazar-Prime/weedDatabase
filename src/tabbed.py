@@ -4,33 +4,44 @@ import webbrowser
 import time
 
 # USER Imports
-from processImg import imageView
+import processImg
+
+checkbox_val = False
+weedList = []
+userWeedCLass = ""
+img = None
+gbSubmit = False
 
 
-def start_tabs(weedList):
+def _callimagView():
+    global img, weedList, userWeedCLass, checkbox_val, gbSubmit
+    processImg.imageView(img, weedList, userWeedCLass, checkbox_val)
+
+
+def start_tabs(wl):
+    global img, weedList, userWeedCLass, checkbox_val, gbSubmit
+    weedList = wl
+
     tab1, tab2, tab3 = st.tabs(["Single File Upload", "Helpful Links", "Our Team"])
-
     with tab1:
-        # st.title("Upload a file to get started")
-        file = st.file_uploader(
+        img = st.file_uploader(
             label="Upload a file to get started",
-            # label="",
             type=["jpg", "png", "JPG", "PNG", "jpeg", "JPEG"],
         )
-        col11, col12 = st.columns(2)
+        col11, col12 = st.columns([1, 2])
         with col11:
-            checkbox_val = st.checkbox("Is Annotation Available?")
+            checkbox_val = st.checkbox("Is Annotation Available?", key="checkboxAA")
         with col12:
             if checkbox_val:
                 userWeedCLass = st.selectbox(label="Select the Class", options=weedList)
-            # Every form must have a submit button.
-        submitted = st.button("Start Analysis")
-    if submitted:
-        imageView(file)
-        # spinner while inference is running
-        with st.spinner(text="Inferencing..."):
-            time.sleep(5)
-        st.success("Done!")
+        submitted = st.button("Start Analysis", key="startAnalysis")
+        if submitted:
+            gbSubmit = True
+
+        if gbSubmit:
+            suc = processImg.imageView(img, weedList, userWeedCLass, checkbox_val)
+            if suc == 1:
+                st.success("Analysis Complete and Image Saved")
 
     with tab2:
         url = "https://www.streamlit.io/"
