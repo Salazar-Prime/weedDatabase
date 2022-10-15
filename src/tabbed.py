@@ -7,27 +7,30 @@ import time
 from processImg import imageView
 
 
-def start_tabs():
+def start_tabs(weedList):
     tab1, tab2, tab3 = st.tabs(["Single File Upload", "Helpful Links", "Our Team"])
 
     with tab1:
-        st.title("Upload a file to get started")
-        with st.form("my_form", clear_on_submit=True):
-            file = st.file_uploader(
-                label="Upload a file",
-                # label="",
-                type=["jpg", "png", "JPG", "PNG", "jpeg", "JPEG"],
-            )
+        # st.title("Upload a file to get started")
+        file = st.file_uploader(
+            label="Upload a file to get started",
+            # label="",
+            type=["jpg", "png", "JPG", "PNG", "jpeg", "JPEG"],
+        )
+        col11, col12 = st.columns(2)
+        with col11:
             checkbox_val = st.checkbox("Is Annotation Available?")
-
+        with col12:
+            if checkbox_val:
+                userWeedCLass = st.selectbox(label="Select the Class", options=weedList)
             # Every form must have a submit button.
-            submitted = st.form_submit_button("Start Analysis")
-        if submitted:
-            imageView(file)
-            # spinner while inference is running
-            with st.spinner(text="Inferencing..."):
-                time.sleep(5)
-            st.success("Done!")
+        submitted = st.button("Start Analysis")
+    if submitted:
+        imageView(file)
+        # spinner while inference is running
+        with st.spinner(text="Inferencing..."):
+            time.sleep(5)
+        st.success("Done!")
 
     with tab2:
         url = "https://www.streamlit.io/"
