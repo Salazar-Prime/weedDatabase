@@ -35,5 +35,5 @@ def suc():
 
 
 def inference(img):
-    inferConfidence = 0.6
+    inferConfidence = 0.4
     return "pigweed", inferConfidence
