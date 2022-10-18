@@ -42,20 +42,21 @@ def start_tabs(wl):
             suc = processImg.imageView(img, weedList, userWeedCLass, checkbox_val)
             if suc == 1:
                 st.success("Analysis Complete and Image Saved")
+                time.sleep(3)
 
     with tab2:
         url = "https://www.streamlit.io/"
         if st.button("Streamlit"):
             webbrowser.open_new_tab(url)
-        url = "https://engineering.purdue.edu/Engr/Research/EURO"
-        if st.button("EURO Homepage"):
+        url = "https://scholar.google.com/"
+        if st.button("Shoulder of Giants"):
             webbrowser.open_new_tab(url)
-        url = "https://engineering.purdue.edu/Engr/Research/EURO/students/FAQ"
-        if st.button("SURF Program Details"):
-            webbrowser.open_new_tab(url)
-        url = "https://engineering.purdue.edu/Engr/Research/EURO/surf-symposium"
-        if st.button("SURF Symposium"):
-            webbrowser.open_new_tab(url)
+        # url = "https://engineering.purdue.edu/Engr/Research/EURO/students/FAQ"
+        # if st.button("SURF Program Details"):
+        #     webbrowser.open_new_tab(url)
+        # url = "https://engineering.purdue.edu/Engr/Research/EURO/surf-symposium"
+        # if st.button("SURF Symposium"):
+        #     webbrowser.open_new_tab(url)
 
     with tab3:
         col51, col52, col53 = st.columns([1, 1, 1], gap="medium")

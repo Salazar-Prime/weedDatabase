@@ -13,11 +13,11 @@ from authentication import Authenticate, Hasher
 import tabbed
 from utils import getWeedList
 
-_RELEASE = False
+_RELEASE = True
 
 
 def startApp():
-    st.title("SURF Template Generator")
+    st.title("Weed Database")
     weedList = getWeedList("src/config/weedClassList.txt")
     print(weedList)
     tabs = tabbed.start_tabs(weedList)
