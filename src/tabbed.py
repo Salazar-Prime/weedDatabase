@@ -66,26 +66,51 @@ def start_tabs(cl):
         st.write("Search Database")
         query = st.text_input("Enter Search Query")
         if st.button("Search") and query:
-            numberImages = [int(s) for s in str.split(query) if s.isdigit()][0]
+            numberImages = [int(s) for s in str.split(query) if s.isdigit()]
+            if len(numberImages) == 0:
+                st.write("No Images Found, showing 1 image only")
+                numberImages = [1]
+            numberImages = numberImages[0]
             classForImage = query.split()
             for i in classForImage:
                 if i in classList:
                     classForImage = i
                     break
-
-            st.write(f"Showing {numberImages} image for class {classForImage}")
+            if type(classForImage) == list:
+                st.write("No Images Found, showing images of cat")
+                classForImage = "cat"
             # get list of files in folder
             imgList = os.listdir(f"database/{classForImage}")
             print(imgList)
-            if len(imgList) > 0 and numberImages <= len(imgList):
+            if len(imgList) > 0 and numberImages <= len(imgList) and numberImages > 0:
+                st.write(f"Showing {numberImages} image for class {classForImage}")
                 for i in range(numberImages):
                     print("Hello ---------", imgList[i])
                     img = Image.open(f"database/{classForImage}/{imgList[i]}")
                     img = img.resize((150, 150))
                     st.image(img)
+            else:
+                st.write(f"Insufficient images found for class {classForImage}")
 
     with tab3:
-        pass
+        col31, col32 = st.columns([1, 1])
+        with col31:
+            st.write("Feline Friend")
+            imgList = os.listdir(f"database/{classList[0]}")
+            if len(imgList) > 0:
+                for i in range(len(imgList)):
+                    img = Image.open(f"database/{classList[0]}/{imgList[i]}")
+                    img = img.resize((150, 150))
+                    st.image(img)
+        with col32:
+            st.write("Woof! Woof!")
+            imgList = os.listdir(f"database/{classList[1]}")
+            if len(imgList) > 0:
+                for i in range(len(imgList)):
+                    img = Image.open(f"database/{classList[1]}/{imgList[i]}")
+                    img = img.resize((150, 150))
+                    st.image(img)
+
     with tab4:
         url = "https://www.streamlit.io/"
         if st.button("Streamlit"):
