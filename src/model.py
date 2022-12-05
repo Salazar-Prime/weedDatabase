@@ -10,17 +10,17 @@ import PIL
 from PIL import Image, ImageDraw
 import numpy as np
 
-model_path="../model_shrub.h5"
+model_path="models/model_shrub.h5"
 
 
-def get_model(uploaded_file):
+def getInference(uploaded_file):
     # text over upload button "Upload Image"
     if uploaded_file is not None:
         model = load_model(model_path)
-        display_image = PIL.Image.open(uploaded_file)
+        display_image = PIL.Image.open(uploaded_file)  # type: ignore
 
             # # Resize the image for tensorflow predicition
-        display_image = display_image.resize((224, 224), PIL.Image.ANTIALIAS)
+        display_image = display_image.resize((150, 150), PIL.Image.ANTIALIAS)
         img_tensor = tf.keras.preprocessing.image.img_to_array(display_image)
         img_tensor = np.expand_dims(img_tensor, axis=0)
         img_tensor /= 255.

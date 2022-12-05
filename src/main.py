@@ -11,16 +11,16 @@ sns.set()
 # USER Imports
 from authentication import Authenticate, Hasher
 import tabbed
-from utils import getWeedList
+from utils import getClassList
 
-_RELEASE = True
+_RELEASE = False
 
 
 def startApp():
-    st.title("Weed Database")
-    weedList = getWeedList("src/config/weedClassList.txt")
-    print(weedList)
-    tabs = tabbed.start_tabs(weedList)
+    st.title("Cats and Dogs")
+    classList = getClassList("src/config/classList.txt")
+    print("Class List: ", classList)
+    tabs = tabbed.start_tabs(classList)
 
 
 def main():

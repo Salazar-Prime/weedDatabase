@@ -1,5 +1,5 @@
-def getWeedList(filePath):
+def getClassList(filePath):
     file = open(filePath, "r")
-    weedList = file.readlines()
-    weedList = list(map(str.strip, weedList))
-    return weedList
+    classList = file.readlines()
+    classList = list(map(str.strip, classList))
+    return classList

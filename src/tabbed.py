@@ -7,20 +7,20 @@ import time
 import processImg
 
 checkbox_val = False
-weedList = []
-userWeedCLass = ""
+classList = []
+userSelectedClass = ""
 img = None
 gbSubmit = False
 
 
 def _callimagView():
-    global img, weedList, userWeedCLass, checkbox_val, gbSubmit
-    processImg.imageView(img, weedList, userWeedCLass, checkbox_val)
+    global img, classList, userSelectedClass, checkbox_val, gbSubmit
+    processImg.imageView(img, classList, userSelectedClass, checkbox_val)
 
 
-def start_tabs(wl):
-    global img, weedList, userWeedCLass, checkbox_val, gbSubmit
-    weedList = wl
+def start_tabs(cl):
+    global img, classList, userSelectedClass, checkbox_val, gbSubmit
+    classList = cl
 
     tab1, tab2, tab3 = st.tabs(["Single File Upload", "Helpful Links", "Our Team"])
     with tab1:
@@ -33,13 +33,13 @@ def start_tabs(wl):
             checkbox_val = st.checkbox("Is Annotation Available?", key="checkboxAA")
         with col12:
             if checkbox_val:
-                userWeedCLass = st.selectbox(label="Select the Class", options=weedList)
+                userSelectedClass = st.selectbox(label="Select the Class", options=classList)
         submitted = st.button("Start Analysis", key="startAnalysis")
         if submitted:
             gbSubmit = True
 
         if gbSubmit:
-            suc = processImg.imageView(img, weedList, userWeedCLass, checkbox_val)
+            suc = processImg.imageView(img, classList, userSelectedClass, checkbox_val)
             if suc == 1:
                 st.success("Analysis Complete and Image Saved")
                 time.sleep(3)
@@ -76,3 +76,6 @@ def start_tabs(wl):
         with col55:
             st.image("media/varun.jpeg", caption="Varun", width=210)
             st.text("EURO")
+
+
+
