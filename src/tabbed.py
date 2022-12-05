@@ -76,6 +76,9 @@ def start_tabs(cl):
                 if i in classList:
                     classForImage = i
                     break
+                elif i.rstrip("s") in classList:
+                    classForImage = i.rstrip("s")
+                    break
             if type(classForImage) == list:
                 st.write("No Images Found, showing images of cat")
                 classForImage = "cat"
