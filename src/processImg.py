@@ -16,7 +16,7 @@ def imageView(img, classList, userSelectedClass, checkbox_val=False):
         inferenceMesasge, inferClass, _, inferConfidence = getInference(img)  # type: ignore
         with st.spinner(text="Inferencing..."):
             time.sleep(2)
-        if inferClass == userSelectedClass and inferConfidence > 0.5 and checkbox_val:
+        if inferClass == userSelectedClass and inferConfidence > 50 and checkbox_val:
             st.write(f"Predicted Class: {inferClass}")
             st.write(f"Class Confidence: {inferConfidence}")
             return 1, inferClass, inferConfidence
