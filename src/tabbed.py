@@ -76,3 +76,6 @@ def start_tabs(wl):
         with col55:
             st.image("media/varun.jpeg", caption="Varun", width=210)
             st.text("EURO")
+
+
+
