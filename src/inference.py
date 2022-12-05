@@ -1,12 +1,6 @@
 import streamlit as st
 import tensorflow as tf
-
-# from tensorflow.keras import layers
-# from tensorflow.keras import models, utils
 import pandas as pd
-
-# from tf.keras.models import load_model
-# from tensorflow.keras.preprocessing.image import load_img, img_to_array
 from tensorflow.python.keras import utils
 import PIL
 from PIL import Image, ImageDraw
@@ -52,4 +46,4 @@ def getInference(uploaded_file):
             classNo = 1
             conf = (2 * prediction[0][0]) - 1  # mapping for confidence
 
-        return [predictionFunny, predClass, classNo, round(conf * 100, 2)]
+        return predictionFunny, predClass, classNo, round(conf * 100, 2)

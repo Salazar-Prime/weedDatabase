@@ -2,9 +2,13 @@
 import streamlit as st
 import webbrowser
 import time
+import os
+from PIL import Image
 
 # USER Imports
 import processImg
+from utils import saveImg
+
 
 checkbox_val = False
 classList = []
@@ -22,7 +26,15 @@ def start_tabs(cl):
     global img, classList, userSelectedClass, checkbox_val, gbSubmit
     classList = cl
 
-    tab1, tab2, tab3 = st.tabs(["Single File Upload", "Helpful Links", "Our Team"])
+    tab1, tab2, tab3, tab4, tab5 = st.tabs(
+        [
+            "Single File Upload",
+            "Search Database",
+            "View Database",
+            "Helpful Links",
+            "Our Team",
+        ]
+    )
     with tab1:
         img = st.file_uploader(
             label="Upload a file to get started",
@@ -33,18 +45,48 @@ def start_tabs(cl):
             checkbox_val = st.checkbox("Is Annotation Available?", key="checkboxAA")
         with col12:
             if checkbox_val:
-                userSelectedClass = st.selectbox(label="Select the Class", options=classList)
+                userSelectedClass = st.selectbox(
+                    label="Select the Class", options=classList
+                )
         submitted = st.button("Start Analysis", key="startAnalysis")
         if submitted:
             gbSubmit = True
 
         if gbSubmit:
-            suc = processImg.imageView(img, classList, userSelectedClass, checkbox_val)
+            suc, finalClass, _ = processImg.imageView(
+                img, classList, userSelectedClass, checkbox_val
+            )
             if suc == 1:
+                saveImg(img, finalClass)
                 st.success("Analysis Complete and Image Saved")
+                gbSubmit = False
                 time.sleep(3)
 
     with tab2:
+        st.write("Search Database")
+        query = st.text_input("Enter Search Query")
+        if st.button("Search") and query:
+            numberImages = [int(s) for s in str.split(query) if s.isdigit()][0]
+            classForImage = query.split()
+            for i in classForImage:
+                if i in classList:
+                    classForImage = i
+                    break
+
+            st.write(f"Showing {numberImages} image for class {classForImage}")
+            # get list of files in folder
+            imgList = os.listdir(f"database/{classForImage}")
+            print(imgList)
+            if len(imgList) > 0 and numberImages <= len(imgList):
+                for i in range(numberImages):
+                    print("Hello ---------", imgList[i])
+                    img = Image.open(f"database/{classForImage}/{imgList[i]}")
+                    img = img.resize((150, 150))
+                    st.image(img)
+
+    with tab3:
+        pass
+    with tab4:
         url = "https://www.streamlit.io/"
         if st.button("Streamlit"):
             webbrowser.open_new_tab(url)
@@ -58,7 +100,7 @@ def start_tabs(cl):
         # if st.button("SURF Symposium"):
         #     webbrowser.open_new_tab(url)
 
-    with tab3:
+    with tab5:
         col51, col52, col53 = st.columns([1, 1, 1], gap="medium")
         with col51:
             st.image("media/varun.jpeg", caption="Varun", width=210)
@@ -76,6 +118,3 @@ def start_tabs(cl):
         with col55:
             st.image("media/varun.jpeg", caption="Varun", width=210)
             st.text("EURO")
-
-
-
