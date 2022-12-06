@@ -9,10 +9,11 @@ sns.set_theme(style="darkgrid")
 sns.set()
 
 # USER Imports
-from authentication import Authenticate, Hasher
+from authentication.authenticate import Authenticate, Hasher
 import tabbed
 from utils import getClassList
 
+# from authentication.authenticate import Authenticate
 _RELEASE = True
 
 
