@@ -63,12 +63,12 @@ def start_tabs(cl):
                 time.sleep(3)
 
     with tab2:
-        st.write("Search Database")
+        # st.write("Search Database")
         query = st.text_input("Enter Search Query")
         if st.button("Search") and query:
             numberImages = [int(s) for s in str.split(query) if s.isdigit()]
             if len(numberImages) == 0:
-                st.write("No Images Found, showing 1 image only")
+                # st.write("No Images Found, showing 1 image only")
                 numberImages = [1]
             numberImages = numberImages[0]
             classForImage = query.split()
@@ -98,7 +98,7 @@ def start_tabs(cl):
     with tab3:
         col31, col32 = st.columns([1, 1])
         with col31:
-            st.write("Feline Friend")
+            st.header("Feline Friend")
             imgList = os.listdir(f"database/{classList[0]}")
             if len(imgList) > 0:
                 for i in range(len(imgList)):
@@ -106,7 +106,7 @@ def start_tabs(cl):
                     img = img.resize((150, 150))
                     st.image(img)
         with col32:
-            st.write("Woof! Woof!")
+            st.header("Woof! Woof!")
             imgList = os.listdir(f"database/{classList[1]}")
             if len(imgList) > 0:
                 for i in range(len(imgList)):

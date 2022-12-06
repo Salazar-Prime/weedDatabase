@@ -13,7 +13,7 @@ from authentication import Authenticate, Hasher
 import tabbed
 from utils import getClassList
 
-_RELEASE = False
+_RELEASE = True
 
 
 def startApp():
