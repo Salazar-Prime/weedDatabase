@@ -14,7 +14,7 @@ import tabbed
 from utils import getClassList
 
 # from authentication.authenticate import Authenticate
-_RELEASE = True
+_RELEASE = False
 
 
 def startApp():
